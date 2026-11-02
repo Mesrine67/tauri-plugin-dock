@@ -1,5 +1,5 @@
 const COMMANDS: &[&str] = &[
-    "show", "hide", "toggle", "close", "open_settings", "set_monitor", "get_status"
+    "show", "hide", "toggle", "close", "open_settings", "set_monitor", "get_status", "get_settings", "set_settings"
 ];
 
 fn main() {
