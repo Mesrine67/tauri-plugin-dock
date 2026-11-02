@@ -13,3 +13,24 @@ export const openDockSettings = (): Promise<void> => invoke('plugin:dock|open_se
 export const setDockMonitor = (monitorId: string): Promise<void> =>
   invoke('plugin:dock|set_monitor', { monitorId })
 export const getDockStatus = (): Promise<DockStatus> => invoke('plugin:dock|get_status')
+
+export interface DockSettings {
+  folder: string
+  toggleMode: boolean
+  showFolderName: boolean
+  showItemCount: boolean
+  backdrop: 'solid' | 'acrylic'
+  opacity: number
+  roundedCorners: boolean
+  animations: boolean
+  gridColumns: number
+  gridRows: number
+  padding: number
+  centerCursor: boolean
+  offsetX: number
+  offsetY: number
+}
+
+export const getDockSettings = (): Promise<DockSettings> => invoke('plugin:dock|get_settings')
+export const setDockSettings = (settings: DockSettings): Promise<void> =>
+  invoke('plugin:dock|set_settings', { settings })

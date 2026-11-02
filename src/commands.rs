@@ -1,4 +1,5 @@
 use serde::Serialize;
+use crate::settings::DockSettings;
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -42,6 +43,18 @@ pub fn set_monitor(monitor_id: String) -> Result<(), String> {
     #[cfg(windows)] { return crate::native::set_monitor(&monitor_id); }
     #[cfg(not(windows))] { let _ = monitor_id; unavailable() }
 }
+#[tauri::command]
+pub fn get_settings() -> Result<DockSettings, String> {
+    #[cfg(windows)] { return crate::settings::load(); }
+    #[cfg(not(windows))] { unavailable()?; unreachable!() }
+}
+
+#[tauri::command]
+pub fn set_settings(settings: DockSettings) -> Result<(), String> {
+    #[cfg(windows)] { return crate::settings::save(settings); }
+    #[cfg(not(windows))] { let _ = settings; unavailable() }
+}
+
 #[tauri::command]
 pub fn get_status() -> DockStatus {
     DockStatus {

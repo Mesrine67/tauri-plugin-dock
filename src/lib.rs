@@ -1,5 +1,6 @@
 //! Native Windows Dock plugin for Tauri 2.
 mod commands;
+mod settings;
 #[cfg(windows)]
 mod native;
 
@@ -25,6 +26,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
             commands::show, commands::hide, commands::toggle,
             commands::close, commands::open_settings,
             commands::set_monitor, commands::get_status,
+            commands::get_settings, commands::set_settings,
         ])
         .on_event(|_, event| {
             #[cfg(windows)]

@@ -35,6 +35,24 @@ LRESULT CALLBACK CtrlProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
         }
         return TRUE;
 
+    case dk::WM_APP_RELOAD_SETTINGS:
+        if (app && app->model && app->overlay)
+        {
+            Settings updated = LoadSettings();
+            const bool folderChanged = !updated.folder.empty() &&
+                updated.folder != app->model->FolderPath();
+            app->settings = updated;
+            if (folderChanged)
+                app->SetFolder(updated.folder);
+            app->ApplyAll();
+            if (app->PreviewActive())
+                app->LayoutPreview();
+            else
+                app->overlay->RelayoutIfVisible();
+            app->overlay->RerenderIfVisible();
+        }
+        return 0;
+
     case dk::WM_APP_SHOW:
         if (app && app->overlay && !app->PreviewActive())
             app->overlay->Show();

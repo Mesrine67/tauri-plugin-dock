@@ -46,6 +46,11 @@ extern "C" bool dock_native_show() { return send_command(dk::WM_APP_SHOW); }
 extern "C" bool dock_native_hide() { return send_command(dk::WM_APP_HIDE); }
 extern "C" bool dock_native_toggle() { return send_command(dk::WM_APP_TOGGLE); }
 extern "C" bool dock_native_open_settings() { return send_command(dk::WM_APP_SHOWSETTINGS); }
+extern "C" bool dock_native_reload_settings() {
+    std::lock_guard<std::mutex> guard(lock);
+    HWND h = own_control();
+    return !h || PostMessageW(h, dk::WM_APP_RELOAD_SETTINGS, 0, 0) != FALSE;
+}
 extern "C" bool dock_native_is_visible() {
     const HWND h = FindWindowW(L"DockOverlay", nullptr);
     DWORD pid = 0;

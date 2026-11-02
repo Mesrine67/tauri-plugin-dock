@@ -11,6 +11,7 @@ unsafe extern "C" {
     fn dock_native_stop() -> bool;
     fn dock_native_is_visible() -> bool;
     fn dock_native_set_monitor(monitor: *const u16) -> bool;
+    fn dock_native_reload_settings() -> bool;
 }
 
 fn result(ok: bool, operation: &str) -> Result<(), String> {
@@ -25,6 +26,9 @@ pub fn open_settings() -> Result<(), String> {
 }
 pub fn close() -> Result<(), String> { result(unsafe { dock_native_stop() }, "stop") }
 pub fn is_visible() -> bool { unsafe { dock_native_is_visible() } }
+pub fn reload() -> Result<(), String> {
+    result(unsafe { dock_native_reload_settings() }, "reload settings")
+}
 pub fn set_monitor(value: &str) -> Result<(), String> {
     if value.len() > 256 || value.contains('\0') {
         return Err("Invalid monitor identifier".into());
