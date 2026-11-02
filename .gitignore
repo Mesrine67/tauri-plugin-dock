@@ -1,0 +1,6 @@
+/target/
+/node_modules/
+/dist-js/
+/native/dock/src/*.obj
+/.idea/
+/.vscode/

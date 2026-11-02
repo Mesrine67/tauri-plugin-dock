@@ -1,0 +1,4 @@
+"$schema" = "schemas/schema.json"
+[default]
+description = "No window-control commands are enabled by default. Grant only the commands required by each window."
+permissions = []

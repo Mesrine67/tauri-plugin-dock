@@ -1,0 +1,25 @@
+[package]
+name = "tauri-plugin-dock"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.90"
+description = "Native Windows folder dock plugin for Tauri 2"
+repository = "https://github.com/Mesrine67/tauri-plugin-dock"
+license = "GPL-3.0-or-later"
+links = "tauri-plugin-dock"
+exclude = ["/guest-js", "/package.json", "/tsconfig.json", "/examples"]
+
+[dependencies]
+tauri = { version = "2", default-features = false }
+serde = { version = "1", features = ["derive"] }
+
+[build-dependencies]
+tauri-plugin = { version = "2", features = ["build"] }
+cc = "1"
+
+[package.metadata.platforms.support]
+windows = { level = "full", notes = "Win32 and Direct2D" }
+linux = { level = "none", notes = "Windows-only native dock backend" }
+macos = { level = "none", notes = "Windows-only native dock backend" }
+android = { level = "none", notes = "" }
+ios = { level = "none", notes = "" }

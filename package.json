@@ -1,0 +1,22 @@
+{
+  "name": "@fxmp/tauri-plugin-dock",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Typed JavaScript API for tauri-plugin-dock",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./guest-js/index.ts",
+      "default": "./guest-js/index.ts"
+    }
+  },
+  "peerDependencies": { "@tauri-apps/api": "^2.0.0" },
+  "devDependencies": {
+    "@tauri-apps/api": "^2.0.0",
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}
