@@ -36,3 +36,12 @@ pub fn set_monitor(value: &str) -> Result<(), String> {
 pub fn start() -> Result<(), String> {
     result(unsafe { dock_native_start() }, "start")
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn native_library_links_without_starting_a_window() {
+        // This forces MSVC to link the C++ engine into a real executable.
+        let _ = super::is_visible();
+    }
+}
