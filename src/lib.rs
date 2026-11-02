@@ -10,6 +10,10 @@ use tauri::{plugin::{Builder, TauriPlugin}, Runtime};
 pub mod api {
     #[cfg(windows)]
     pub use crate::native::{close, hide, open_settings, set_monitor, show, toggle};
+    #[cfg(windows)]
+    pub fn is_hold_mode() -> bool {
+        crate::settings::load().map(|v| !v.toggle_mode).unwrap_or(false)
+    }
     #[cfg(not(windows))]
     pub fn toggle() -> Result<(), String> { Err("Dock requires Windows".into()) }
     #[cfg(not(windows))]
